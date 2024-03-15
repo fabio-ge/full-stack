@@ -1,0 +1,15 @@
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container a {
+    background-color: firebrick;
+    color: white;
+    padding: 0.2em 0.6em;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: var(--fs-azioni);
+}
