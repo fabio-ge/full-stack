@@ -8,6 +8,7 @@ import com.fabio.bookgiveaway.books.BookService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -53,6 +54,29 @@ public class BundleService {
 
         bookIds.forEach(id -> bookService.deleteBook(id));
         bundleRepo.deleteById(bundleId);    
+    }
+
+    public String getNomeBundle(Long id){
+        Optional<BundleModel> bundle = bundleRepo.findById(id);
+        
+        if(bundle.isPresent()){
+            return bundle.get().getNome();
+        }else{
+            return null;
+        }
+    }
+
+    public List<String> elenco(Long id){
+        return bundleBookRepo
+                    .findByBundleId(id)
+                    .stream()
+                    .map(bundleBook -> {
+                        Long bookId = bundleBook.getBookId();
+                        BookModel book = bookService.findBookById(bookId);
+
+                        return book.toString();
+                    })
+                    .toList();
     }
 
     //UTIL METHODS

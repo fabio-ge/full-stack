@@ -11,7 +11,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -31,4 +30,8 @@ public class BookModel {
 
     @Column(name = "condizioni")
     private String condizioni;
+
+    public String toString(){
+        return "titolo: "+this.getTitolo()+", edizione: "+this.getEdizione()+", condizioni: "+this.getCondizioni();
+    }
 }

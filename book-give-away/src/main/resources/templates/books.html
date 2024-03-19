@@ -14,6 +14,7 @@
     <div class="container">
         <div class="actions">
             <div>Libri totali: <span th:text="${totale}">10</span></div>
+            <a href="/stampa">Elenco</a>
             <div>
                 <form action="/books" method="get">
                     <input type="text" name="q" placeholder="cerca" th:value="${filter}">

@@ -2,6 +2,7 @@ package com.fabio.bookgiveaway.books;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -53,4 +54,13 @@ public class BookService {
     public BookModel findBookById(Long id){
         return bookRepo.findById(id).orElseThrow(() -> new NoSuchElementException());
     }
+
+    public List<String> elencoTotale(){
+            return bookRepo
+                        .findAll()
+                        .stream()
+                        .map(BookModel::toString)
+                        .toList();
+    }
+
 }

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books to give away</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Itim&family=Roboto:ital,wght@0,500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div th:insert="~{parts/header :: header}"></div>
+    <div class="mg-2">
+        <h2 th:if="${nomeBundle}" th:text="${nomeBundle}">Nome del bundle</h2>
+        <p th:each="book : ${elenco}"><span th:text="${book}">Descrizione del libro</span></p>
+    </div>
+    <div th:insert="~{parts/footer :: footer}"></div>
+</body>
+</html>

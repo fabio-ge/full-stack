@@ -14,9 +14,8 @@
     <div th:insert="~{parts/header :: header}"></div>
     <div class="container">
         <h2> Guarda i bundle creati</h2>
-        <a href="/books">Torna all' home page</a>
         <div class="card-vertical" th:each="bundle: ${bundles}">
-            <h3 th:text="${bundle.nome}">Nome del bundle</h3>
+            <a class="titolo" th:href="@{|/stampa/${bundle.id}|}" alt="stampa il bundle"><h3 th:text="${bundle.nome}">Nome del bundle</h3></a>
             <ul>
                 <li th:each="book : ${bundle.books}">
                     <p th:text="${book.titolo}"> Titolo </p>

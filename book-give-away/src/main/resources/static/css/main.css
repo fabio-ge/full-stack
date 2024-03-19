@@ -127,3 +127,7 @@ footer {
   font-family: var(--ff-titolo);
   width: 100%;
 }
+
+.mg-2{
+    margin: 2em;
+}

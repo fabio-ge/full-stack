@@ -14,7 +14,6 @@
     <div th:insert="~{parts/header :: header}"></div>
     <div class="container">
         <h2> Crea un bundle di libri</h2>
-        <a href="/books">Torna all' home page</a>
         <form th:action="@{/bundle}" method="post" th:object="${newBundle}">
             <div>
                 <input type="text" name="nome" placeholder="Nome del bundle">
