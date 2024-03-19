@@ -1,3 +1,12 @@
+.container a {
+    background-color: firebrick;
+    color: white;
+    padding: 0.2em 0.6em;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: var(--fs-azioni);
+}
+
 .card-vertical {
     border: 2px solid lightgray;
     box-shadow: 1px 1px 1px darkgrey;

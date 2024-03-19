@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="css/bundle.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Roboto:ital,wght@0,500;&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Roboto:ital,wght@0,500&display=swap" rel="stylesheet">
 </head>
 <body>
     <div th:insert="~{parts/header :: header}"></div>
     <div class="container">
         <h2> Crea un bundle di libri</h2>
         <a href="/books">Torna all' home page</a>
-        <form action="" method="post" th:object="${newBundle}">
+        <form th:action="@{/bundle}" method="post" th:object="${newBundle}">
             <div>
                 <input type="text" name="nome" placeholder="Nome del bundle">
                 <input type="submit" value="Salva">

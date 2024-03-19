@@ -22,3 +22,35 @@ Il motivo, profondamente meditato, è semplicemente che queste tecnologie mi pia
 
 
 ## Specifiche dell' applicazione
+
+Nell' applicazione esiste un solo ruolo, l' amministratore, che può fare tutto. Deve, prima di poter procedere con l' amministrazione dei libri, autenticarsi.
+Ci sono le seguenti funzionalità:
+  - vedere il proprio patrimonio di libri
+    - dalla pagina iniziale si vede l' elenco dei libri posseduti
+  - aggiungere un libro
+    - aggiunge un libro nel DB
+  - eliminare un libro
+    - elimina un libro dal DB. Se il libro era presente anche in un bundle, lo toglie dal Bundle
+  - creare un bundle
+    - un bundle è un sottoinsieme di libri, raggruppati da un etichetta comune. Ad esempio si può creare il Bundle della narrativa italiana e includere tutti i libri di autori italiani. E' utile perché, per vendere o regalare i libri, spesso è utile raggrupparli per genere o, viceversa, se si è già raggiunto un accordo con una libreria si può creare il bundle per quella libreria per poi eliminare i libri in blocco, una volta venduti.
+    Uno stesso libro può essere presente in più bundle, perché ci sono diverse possibilità per raggrupparlo e venderlo.
+  - eliminare un bundle
+    - questa operazione considera il bundle venduto perciò fa le seguenti cose:
+        1. elimina il bundle
+        2. elimina tutti i libri contenuti dall' elenco totale
+        3. toglie da eventuali altri bundle i libri presenti in questo bundle.
+  - sganciare i libri da un bundle
+    - elimina semplicemente l' associazione dei libri al bundle, che non esisterà più. I libri, ovviamente, restano disponibili nell' elenco.
+  - stampare un elenco
+    - permette di stampare a video, plain text, un elenco di libri, magari per fare un copia e incolla e mandarlo via mail
+
+## Base dati
+
+Magari è esagerato chiamarla così. Ogni progetto dovrebbe avere un file init.sql con l' sql per generare le tabelle nel DB.
+Molto in breve ci sono 2 tabella per l' autenticazione: users e authorities.
+Ce ne sono 3 per la logica dell' applicazione.
+Una per i libri, una per i bundle e l' ultima per le associazioni tra libri e bundle.
+Per ulteriori dettagli vedere il file init.sql dentro ai singoli progetti.
+
+## Prima applicazione (ah i bei tempi andati)
+

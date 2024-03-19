@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Itim&family=Roboto:ital,wght@0,500;&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Itim&family=Roboto:ital,wght@0,500&display=swap" rel="stylesheet">
 </head>
 <body>
     <div th:insert="~{parts/header :: header}"></div>
@@ -21,11 +21,11 @@
                 
             </div>
         </div>
-        <form method="post" action="/books" th:object="${newBook}">
+        <form method="post" th:action="@{/books}" th:object="${newBook}">
             <input type="text" name="titolo" placeholder="Titolo">
             <input type="text" name="edizione" placeholder="Edizione">
             <input type="text" name="condizioni" placeholder="condizioni">
-            <input type="submit" value="Save">
+            <input type="submit" value="➕">
         </form> 
         <ul>
             <li class="card" th:each="book : ${libri}">
