@@ -47,10 +47,22 @@ Ci sono le seguenti funzionalità:
 ## Base dati
 
 Magari è esagerato chiamarla così. Ogni progetto dovrebbe avere un file init.sql con l' sql per generare le tabelle nel DB.
-Molto in breve ci sono 2 tabella per l' autenticazione: users e authorities.
+Molto in breve ci sono 2 tabelle per l' autenticazione: users e authorities.
 Ce ne sono 3 per la logica dell' applicazione.
 Una per i libri, una per i bundle e l' ultima per le associazioni tra libri e bundle.
 Per ulteriori dettagli vedere il file init.sql dentro ai singoli progetti.
 
 ## Prima applicazione (ah i bei tempi andati)
 
+Questa applicazione è un po' un' operazione di nostalgia, perché è fatta ricordando i tempi in cui le web app erano quasi tutte delle multi page application e le interazioni con il js erano limitate a qualche funzionalità di nicchia.
+In questo caso, giusto per andare sul sicuro, non c' è una riga di js. Se guardate ai file html che vengono giù, vedrete che non ho mai incluso uno script js, né l' ho usato inline nell' html.
+
+### Perché
+
+L' ho fatto soprattutto per esperimento. Spesso, oggi, si dà per scontato che una web app debba essere una SPA (single page application) e si sceglie quella strada senza valutarne i pro e i contro. 
+Volevo vedere cosa succedeva se invece tornavo a fare una MPA (multi page application)
+Per farlo ho usato Spring, in combinazione con Spring Boot naturalmente, e il motore di template thymeleaf. Con questa stack si può costruire un' intera applicazione, come dimostra appunto il risultato.
+In pratica, qualsiasi richiesta viene processata lato server, ed è sempre il server che assembla le pagine HTML con i dati recuperati da Spring, per poi servirle come contenuti statici al client che ne ha fatto richiesta.
+Questo significa che qualsiasi operazione fatta scatena una richiesta e la pagina viene ricaricata completamente.
+D' altra parte, il vantaggio, è che l' applicazione della sicurezza (tramite form di autenticazione in questo caso) è davevro semplice. L' applicazione è SEO friendly, perché non esegue codice lato client e ogni pagina è, come si suol dire, deep linkable (gli  url sono condivisibili).
+Trovate tutto nella directory: book-give-away
