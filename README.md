@@ -66,3 +66,38 @@ In pratica, qualsiasi richiesta viene processata lato server, ed è sempre il se
 Questo significa che qualsiasi operazione fatta scatena una richiesta e la pagina viene ricaricata completamente.
 D' altra parte, il vantaggio, è che l' applicazione della sicurezza (tramite form di autenticazione in questo caso) è davevro semplice. L' applicazione è SEO friendly, perché non esegue codice lato client e ogni pagina è, come si suol dire, deep linkable (gli  url sono condivisibili).
 Trovate tutto nella directory: book-give-away
+
+## Seconda applicazione (HDA)
+
+### Cosa diavolo è?
+
+HDA sta per Hypermedia-Driven Application. Nel libro hypermedia systems (disponibile online) viene definita così: "A web application that uses hypermedia and hypermedia exchanges as its primary mechanism for communicating with a server."
+Ok ma che cos' è un hypermedia e che cosa non lo è?
+Hypermedia è qualsiasi mezzo (ad esempio del testo) che contiene al proprio interno dei riferimenti o link che permettono di interrompere la lettura
+lineare e di saltare ad un altro contenuto (dello stesso mezzo o altro, ad esempio un link in un testo che porti ad un' immagine offre un contenuto di un altro mezzo).
+L' esempio più diffuso e utile a noi in questo contesto è l' html.
+L' html è un mezzo per sua natura hypermediale, tramite 2 tag specifici
+```html
+  <a href="#">vai al link</a>
+  <form method="post" action="/server"></form>
+```
+ che permettono di navigare tra documenti e addirittura di modificarli. Questi 2 elementi però hanno dei limiti. Tanto per dirne una possono usare solo 2 metodi del protocollo di trasferimento HTTP, POST e GET.
+Invece, uno snippet di codice come questo
+```js
+ fetch('url')
+  .then(response => response.json())
+  .then(data => updateUI(data))
+```
+non è un hypermedia. Questo javascript fa una cosa molto comune in questi giorni. Dal client, di solito un browser, chiama un determinato url per ottenere dei dati in cambio, di solito in formato JSON, poi li converte a sua volta in JSON, e da ultimo chiama una funzione che è responsabile dell' aggiornamento dell' UI sulla base dei dati ricevuti.
+Questo, va da sé, rende strettamente accoppiati il client e il server, perché il client ha bisogno di conoscere il significato preciso dei dati che riceve e il modo per far reagire l' interfaccia alla ricezione di questi dati. Una modifica, lato server, ai dati restituiti molto probabilmente richiederà una modifica anche lato client.
+Se invece di restituire dei dati il server rispondesse con un "pezzo" di html, o comunque qualcosa di hypermediale, l'accoppiamento sarebbe invece debole e modifiche al server potrebbero non richiedere modifiche al client.
+Ad oggi il paradigma che va per la maggiore è quello SPA (single page application).
+In pratica l' applicazione web è un' unica pagina che, una volta caricata, non richiede più un giro completo con il server, ma che si aggiorna semplicemente in alcune sue parti tramite interazioni con il server limitate ad alcune parti e guidate dal javascript.
+Si può dire che le web app, oggigiorno, siano pesantemente javascript oriented, tanto che sono nati complessi framework per gestirle.
+Il motivo principale è che questo approccio consente un' interattività molto spinta con l' UI che ormai è un requisito irrinunciabile della modernità.
+Intendiamoci, alcuni producono ancora delle MPA(multi page application), ma sono le eccezioni.
+Il lato negativo di questa faccenda è l' enorme complessità di sviluppo e dei framework che nascono per supportare questo paradigma, tanto che spesso si parla di javascript fatigue.
+Anche il caricamento iniziale della App è rallentato dal fantastiliardo di javascript che è necessario caricare per interagire con l' applicazione.
+Proprio per questo motivo molti cercano un approccio alternativo, come Richard Harris, creatore di Svelte, che cerca un approccio transizionale, cioè un compromesso tra un sistema hypermedia e una single page application.
+Lo scopo di una hypermedia-driven application è quello di mettere insieme il livello hypermedia di un' applicazione multi page con la reattività di una single page application.
+Si riuscirà nell' intento? Vedremo.
