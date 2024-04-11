@@ -1,0 +1,17 @@
+<li class="card">
+<p th:text="${book.autore}"> Autore </p>
+<p th:text="${book.titolo}"> Titolo </p>
+<p th:text="${book.edizione}"> Edizione </p>
+<p th:text="${book.condizioni}"> Condizioni </p>
+<a href="#" hx-include=".delete-csrf-token" hx-swap="outerHTML swap:1s" hx-target="closest li" th:hx-delete="@{|/books/${book.id}|}">
+        Cancella
+    </a>
+</li>
+<div hx-swap-oob="true" id="info-totale">Libri totali: <span th:text="${totale}">0</span></div>
+<form hx-post="/books" hx-swap="beforeend" hx-swap-oob="true" hx-target="#book-list" id="aggiungi" method="post" th:action="@{/books}" th:object="${newBook}">
+<input name="autore" placeholder="Autore" type="text"/>
+<input name="titolo" placeholder="Titolo" type="text"/>
+<input name="edizione" placeholder="Edizione" type="text"/>
+<input name="condizioni" placeholder="condizioni" type="text"/>
+<input type="submit" value="➕"/>
+</form>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login</title>
+<link href="css/login.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Itim&amp;family=Roboto:ital,wght@0,500&amp;display=swap" rel="stylesheet"/>
+</head>
+<body>
+<div class="card container">
+<div class="jp" th:if="${param.error}">
+<img alt="Ah ah ah, non hai detto la parola magica" src="assets/nedry.gif"/>
+<p>Ah ah ah, non hai detto la parola magica</p>
+</div>
+<form method="post" th:action="@{/login}">
+<input name="username" placeholder="username" type="text"/>
+<input name="password" placeholder="password" type="password"/>
+<input id="action" type="submit" value="Entra"/>
+</form>
+</div>
+</body>
+</html>

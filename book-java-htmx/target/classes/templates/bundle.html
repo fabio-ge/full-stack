@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Books to give away</title>
+<link href="css/main.css" rel="stylesheet"/>
+<link href="css/bundle.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Itim&amp;family=Roboto:ital,wght@0,500&amp;display=swap" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{parts/header :: header}"></div>
+<div class="container">
+<h2> Crea un bundle di libri</h2>
+<h3 id="msg-salvataggio"></h3>
+<form class="bundle" hx-post="/bundle" hx-target="#msg-salvataggio" method="post" th:action="@{/bundle}" th:object="${newBundle}">
+<div>
+<input id="nome" name="nome" placeholder="Nome del bundle" type="text"/>
+<input type="submit" value="Salva"/>
+</div>
+<ul>
+<li class="card" th:each="book : ${libri}">
+<input name="selezionato" th:value="${book.id}" type="checkbox"/>
+<p th:text="${book.autore}"> Autore </p>
+<p th:text="${book.titolo}"> Titolo </p>
+<p th:text="${book.edizione}"> Edizione </p>
+<p th:text="${book.condizioni}"> Condizioni </p>
+</li>
+</ul>
+</form>
+</div>
+<div th:insert="~{parts/footer :: footer}"></div>
+<script>
+        htmx.on("htmx:after-request",function(evt){
+            if(evt.detail.successful){
+                document.querySelectorAll('input[type="checkbox"]').forEach(
+	                el => {if (el.checked) el.checked = false}
+                )
+            }
+        })
+    </script>
+</body>
+</html>

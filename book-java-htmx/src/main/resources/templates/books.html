@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Books to give away</title>
+<link href="css/main.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Itim&amp;family=Roboto:ital,wght@0,500&amp;display=swap" rel="stylesheet"/>
+<script defer="" src="/js/htmx.js"></script>
+</head>
+<body>
+<div th:insert="~{parts/header :: header}"></div>
+<div class="container">
+<div class="actions">
+<div id="info-totale">Libri totali: <span th:text="${totale}">10</span></div>
+<a href="#" hx-get="/stampa" hx-push-url="true" hx-target="body">Elenco</a>
+<div>
+<form action="/books" method="get">
+<input hx-get="/books/search" hx-push-url="true" hx-swap="outerHTML" hx-target="#book-list" hx-trigger="input changed delay:500ms" name="q" placeholder="cerca per titolo" type="text"/>
+</form>
+</div>
+</div>
+<form hx-post="/books" hx-swap="beforeend" hx-target="#book-list" id="aggiungi" method="post" th:action="@{/books}" th:object="${newBook}">
+<input name="autore" placeholder="Autore" type="text"/>
+<input name="titolo" placeholder="Titolo" type="text"/>
+<input name="edizione" placeholder="Edizione" type="text"/>
+<input name="condizioni" placeholder="condizioni" type="text"/>
+<input type="submit" value="➕"/>
+</form>
+<ul id="book-list" th:fragment="listaLibri">
+<li class="card" th:each="book : ${libri}">
+<p th:text="${book.autore}"> Autore </p>
+<p th:text="${book.titolo}"> Titolo </p>
+<p th:text="${book.edizione}"> Edizione </p>
+<p th:text="${book.condizioni}"> Condizioni </p>
+<a href="#" hx-include=".delete-csrf-token" hx-swap="outerHTML swap:1s" hx-target="closest li" th:hx-delete="@{|/books/${book.id}|}">
+                    Cancella
+                </a>
+</li>
+</ul>
+</div>
+<input class="delete-csrf-token" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden">
+<div th:insert="~{parts/footer :: footer}"></div>
+</input></body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Books to give away</title>
+<link href="/css/main.css" rel="stylesheet"/>
+<link href="/css/stampa.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Itim&amp;family=Roboto:ital,wght@0,500&amp;display=swap" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{parts/header :: header}"></div>
+<div class="mg-2">
+<label for="a">Autore</label><input id="a" name="filter" type="checkbox" value="a"/>
+<label for="t">Titolo</label><input id="t" name="filter" type="checkbox" value="t"/>
+<label for="e">Edizione</label><input id="e" name="filter" type="checkbox" value="e"/>
+<label for="c">Condizioni</label><input id="c" name="filter" type="checkbox" value="c"/>
+<button hx-target="body" hx-vals="js:{filter: filtra()}" id="filtro" th:hx-get="${bundleId != null ? '/stampa/' + bundleId : '/stampa'}" type="submit">
+            Filtra
+        </button>
+</div>
+<div class="mg-2">
+<h2 th:if="${nomeBundle}" th:text="${nomeBundle}">Nome del bundle</h2>
+<p th:each="book : ${elenco}"><span th:text="${book}">Descrizione del libro</span></p>
+</div>
+<div th:insert="~{parts/footer :: footer}"></div>
+<script>
+            function filtra(){
+                let stringa = '';
+                document.querySelectorAll('input[type="checkbox"]').forEach(el => {
+                    if (el.checked) stringa += el.value;
+                });
+
+                return stringa.length ? stringa : ''
+            }   
+    </script>
+</body>
+</html>

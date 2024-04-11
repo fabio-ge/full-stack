@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books to give away</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/bundles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Roboto:ital,wght@0,500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div th:insert="~{parts/header :: header}"></div>
+    <div class="container">
+        <h2> Guarda i bundle creati</h2>
+        <div class="card-vertical" th:each="bundle: ${bundles}">
+            <a class="titolo" th:href="@{|/stampa/${bundle.id}|}" alt="stampa il bundle"><h3 th:text="${bundle.nome}">Nome del bundle</h3></a>
+            <ul>
+                <li th:each="book : ${bundle.books}">
+                    <p th:text="${book.autore}"> Autore </p>
+                    <p th:text="${book.titolo}"> Titolo </p>
+                    <p th:text="${book.edizione}"> Edizione </p>
+                    <p th:text="${book.condizioni}"> Condizioni </p>
+                </li>
+                
+            </ul>
+            <div class="actions"> 
+                <a th:href="@{|/bundle/sgancia/${bundle.id}|}">Sgancia i libri dal bundle</a>
+                <a th:href="@{|/bundle/delete/${bundle.id}|}">Bundle venduto. Eliminalo.</a>
+            </div>
+        </div>    
+    </div>
+    <div th:insert="~{parts/footer :: footer}"></div>
+</body>
+</html>
