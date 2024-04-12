@@ -10,6 +10,7 @@ import com.fabio.bookgiveaway.books.BookService;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,18 +55,20 @@ public class BundleController {
         return "bundles";
     }
 
-    @GetMapping("/sgancia/{bundleId}")
+    @ResponseBody
+    @DeleteMapping("/{bundleId}")
     public String sgancia(@PathVariable("bundleId") Long bundleId) {
         bundleService.sgancia(bundleId);
 
-        return "redirect:/bundle/all";
+        return "";
     }
 
-    @GetMapping("/delete/{bundleId}")
+    @ResponseBody
+    @DeleteMapping("/complete/{bundleId}")
     public String deleteBundleAndBooks(@PathVariable Long bundleId) {
         bundleService.deleteBundleWithBooks(bundleId);
         
-        return "redirect:/bundle/all";
+        return "";
     }
     
     
