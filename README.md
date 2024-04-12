@@ -89,8 +89,10 @@ Invece, uno snippet di codice come questo
   .then(data => updateUI(data))
 ```
 non è un hypermedia. Questo javascript fa una cosa molto comune in questi giorni. Dal client, di solito un browser, chiama un determinato url per ottenere dei dati in cambio, di solito in formato JSON, poi li converte a sua volta in JSON, e da ultimo chiama una funzione che è responsabile dell' aggiornamento dell' UI sulla base dei dati ricevuti.
-Questo, va da sé, rende strettamente accoppiati il client e il server, perché il client ha bisogno di conoscere il significato preciso dei dati che riceve e il modo per far reagire l' interfaccia alla ricezione di questi dati. Una modifica, lato server, ai dati restituiti molto probabilmente richiederà una modifica anche lato client.
-Se invece di restituire dei dati il server rispondesse con un "pezzo" di html, o comunque qualcosa di hypermediale, l'accoppiamento sarebbe invece debole e modifiche al server potrebbero non richiedere modifiche al client.
+Questo, va da sé, rende strettamente accoppiati il client e il server, perché il client ha bisogno di conoscere il significato preciso dei dati che riceve e il modo per far reagire l' interfaccia alla ricezione di questi dati. Una modifica, lato server, ai dati restituiti, molto probabilmente richiederà una modifica anche lato client.
+L' affermazione di sopra è altamente controversa, perché molti sosterranno l' esatto contrario, ovvero che, avendo creato una SOC (separation of concern) tra il backend e il frontend, questi sono solo debolmente accoppiati. Non sono completamente d' accordo con questa affermazione, e per questo provo a sostenere quasi il contrario, ma secondo me è vero che la faccenda è complessa e il tema è aperto.
+Al solito, tentare di definirlo in maniera stringata, porta a semplificazioni che non descrivono bene la realtà. 
+Se invece di restituire dei dati il server rispondesse con un "pezzo" di html, o comunque qualcosa di hypermediale, l'accoppiamento sarebbe invece debole (affermazione anche più controversa, vedasi sopra) e modifiche al server potrebbero non richiedere modifiche al client.
 Ad oggi il paradigma che va per la maggiore è quello SPA (single page application).
 In pratica l' applicazione web è un' unica pagina che, una volta caricata, non richiede più un giro completo con il server, ma che si aggiorna semplicemente in alcune sue parti tramite interazioni con il server limitate ad alcune parti e guidate dal javascript.
 Si può dire che le web app, oggigiorno, siano pesantemente javascript oriented, tanto che sono nati complessi framework per gestirle.
@@ -100,4 +102,20 @@ Il lato negativo di questa faccenda è l' enorme complessità di sviluppo e dei 
 Anche il caricamento iniziale della App è rallentato dal fantastiliardo di javascript che è necessario caricare per interagire con l' applicazione.
 Proprio per questo motivo molti cercano un approccio alternativo, come Richard Harris, creatore di Svelte, che cerca un approccio transizionale, cioè un compromesso tra un sistema hypermedia e una single page application.
 Lo scopo di una hypermedia-driven application è quello di mettere insieme il livello hypermedia di un' applicazione multi page con la reattività di una single page application.
-Si riuscirà nell' intento? Vedremo.
+Per riuscire nell' intento è necessario creare un HTML++, cosa che la libreria HTMX è nata per fare.
+Addirittura, quello che oggi viene fatto tramite una libreria aggiuntiva, potrebbe diventare domani parte delle specifiche.
+Cosa serve per trasformare HTML in HTML++.
+Lo spiego con un esempio (non sarà esaustivo, ma rende l' idea).
+Se in una pagina HTML abbiamo un link, questo comporta alcune conseguenze:
+- possiamo cliccarlo
+- cliccandolo mandiamo una richiesta ad un server
+- un' eventuale risposta di ritorno ricarica un' intera nuova pagina nel browser
+
+Per trasformare HTML in HTML++ dobbiamo estendere questi comportamenti:
+1. dobbiamo poter dichiarare dei trigger diversi per ogni elemento HTML. Non solo click per i link e submit per i form ma, ad esempio, click su un div. Decorando l' HTML con l' attributo hx-trigger, possiamo appunto specificare diversi tipi di trigger, proprio come si fa con il js, ma con la differenza di restare all' interno dell' HTML.
+2. dobbiamo poter usare tutti i verbi disponibili nell' HTTP, o almeno i più diffusi. Anche in questo caso possiamo inserire, nel tag HTML che deve inviare la richiesta, alcuni attributi, hx-get, hx-post, xh-delete,hx-put,hx-patch, per usare il corrispondente verbo.
+3. dobbiamo poter decidere di rimpiazzare solo una parte della pagina senza ricaricarla completamente.
+Per questo comportamento ci vengono in aiuto 2 attributi resi disponibili da HTMX, hx-target, per individuare la parte di DOM da sostituire, e hx-swap per decidere la strategia con cui rimpiazzare il DOM prescelto.
+
+Nota a margine: E' giusto dire che parliamo di uno sviluppo senza Js? No. Senza scrivere JS, c' è differenza. Htmx è una libreria javascript, quindi non si può dire che sviluppiano senza javascript. 
+In più sono previste funzionalità aggiuntive con un light scripting. cioè piccoli snippet js che aumentano l' interattività dell' interfaccia, senza diventare un nuovo client vero e proprio. HTMX è js friendly, purché il js resti confinato a quello per cui era stato pensato in origine.
