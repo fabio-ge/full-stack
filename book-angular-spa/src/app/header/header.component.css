@@ -1,0 +1,28 @@
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--clr-bg1);
+    color: var(--clr-primary);
+}
+
+header h1 {
+    font-size: var(--fs-header);
+}
+
+header nav {
+    flex-basis: 50%;
+}
+
+
+header nav ul{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+}
+
+header nav ul li a{
+    font-size: var(--fs-action);
+    color: var(--clr-primary);
+}

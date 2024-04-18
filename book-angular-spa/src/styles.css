@@ -1,0 +1,41 @@
+/* RESET */
+
+*,::after,::before {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+}
+
+input, textarea, button {
+    font: inherit;
+}
+
+/* FINE RESET */
+
+:root {
+    --clr-bg1: black;
+    --clr-bg2: #362e3c;
+    --clr-primary: #249D7C;
+    --clr-contrast: #7A2520;
+    --clr-text: #AAB9B2;
+    --ff: "Bangers", system-ui;
+    --fstyle: normal;
+    --fw: 400;
+    --fs-text: 20px;
+    --fs-header: 48px;
+    --fs-action: 36px;
+}
+
+body {
+    font-family: var(--ff);
+    font-style: var(--fstyle);
+    font-weight: var(--fw);
+}
