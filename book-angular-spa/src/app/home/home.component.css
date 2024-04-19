@@ -1,0 +1,24 @@
+.container {
+    width: 90%;
+    margin: 1em auto;
+    text-align: center;
+}
+
+.card {
+    border: 3px solid var(--clr-contrast);
+    box-shadow: 0 5px 5px black;
+    padding-top: 1.3em;
+    max-width: 500px;
+    margin: 0 auto; 
+}
+
+.form-aggiungi {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    align-items: center;
+}
+
+.ricerca {
+    margin: 2em 0.5em;
+}

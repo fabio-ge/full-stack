@@ -1,1 +1,23 @@
-<p>home works!</p>
+<div class="container">
+    <mat-card class="card" >
+        <form [formGroup]="formAggiungi" class="form-aggiungi" (ngSubmit)="aggiungi()">
+            <mat-form-field>
+                <input matInput type="text" formControlName="autore" name="autore" placeholder="autore">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="text" formControlName="titolo" name="titolo" placeholder="titolo">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="text" formControlName="edizione" name="editore" placeholder="editore">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="text" formControlName="condizioni" name="condizioni" placeholder="condizioni">
+            </mat-form-field>
+            <button type="submit" mat-raised-button>Aggiungi</button>   
+        </form>
+    </mat-card>
+    <mat-form-field class="ricerca">
+        <input matInput type="text" name="search" placeholder="ricerca per titolo" #search (keyup.enter)="cerca(search.value)">
+    </mat-form-field>
+    <app-lista-libri [libri]="libri"></app-lista-libri>
+</div>

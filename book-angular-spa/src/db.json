@@ -1,5 +1,32 @@
 {
-	"users": [
-		{"id": 1, "username": "fabio","password": "test"}
-	]
+  "users": [
+    {
+      "id": 1,
+      "username": "fabio",
+      "password": "test"
+    }
+  ],
+  "books": [
+    {
+      "autore": "Eco",
+      "titolo": "Trattato di semiotica",
+      "edizione": "Bompiani",
+      "condizioni": "",
+      "id": 3
+    },
+    {
+      "autore": "Eco",
+      "titolo": "Pape satan aleppe",
+      "edizione": "Bompiani",
+      "condizioni": "ottime condizioni",
+      "id": 7
+    },
+    {
+      "autore": "garavelli",
+      "titolo": "trattato di retorica",
+      "edizione": "bompiani",
+      "condizioni": "",
+      "id": 8
+    }
+  ]
 }

@@ -1,0 +1,11 @@
+<mat-card>
+    <ul>
+        <li *ngFor="let libro of libri">
+            <span>{{ libro.autore }}</span>
+            <span>{{ libro.titolo }}</span>
+            <span>{{ libro.edizione }}</span>
+            <span>{{ libro.condizioni }}</span>
+            <button mat-raised-button (click)="cancella(libro.id)">Cancella</button>
+        </li>
+    </ul>
+</mat-card>

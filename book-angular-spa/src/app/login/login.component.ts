@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MessaggiService } from '../services/messaggi.service';
+import { TIPI_MESSAGGIO } from '../interfaces/tipi-messaggio';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent {
   constructor(private fb: FormBuilder, 
               private authService: AuthService, 
               private router: Router,
-              private snack: MatSnackBar){}
+              private messaggi: MessaggiService){}
 
   login() {
     let { username, password } = this.loginForm.value
@@ -29,11 +30,7 @@ export class LoginComponent {
           sessionStorage.setItem('SESSID','assasa')
           this.router.navigate(['/home'])
         }else {
-          this.snack.open("Autenticazione fallita",'',{
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-            duration: 3000
-          })
+            this.messaggi.messaggio("autenticazione fallita",TIPI_MESSAGGIO.ko)
         }
       }
     );

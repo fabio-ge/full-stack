@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ListaLibriComponent } from './lista-libri/lista-libri.component';
  
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     HomeComponent,
     LoginComponent,
     CreaComponent,
-    GuardaComponent
+    GuardaComponent,
+    ListaLibriComponent
   ],
   imports: [
     BrowserModule,
