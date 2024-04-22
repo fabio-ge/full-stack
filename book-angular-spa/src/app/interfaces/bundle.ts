@@ -1,5 +1,5 @@
 export interface Bundle {
-    id: number;
+    id?: number;
     nome: string;
     elencoLibri: number[]
 }

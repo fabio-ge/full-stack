@@ -32,7 +32,8 @@ export class LoginComponent {
         }else {
             this.messaggi.messaggio("autenticazione fallita",TIPI_MESSAGGIO.ko)
         }
-      }
+      },
+      (error) => this.messaggi.messaggio("problemi di comunicazione con il server", TIPI_MESSAGGIO.ko)
     );
   }
 

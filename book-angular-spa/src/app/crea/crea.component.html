@@ -1,1 +1,13 @@
-<p>crea works!</p>
+<div class="container">
+    <h2>Crea un bundle</h2>
+    <mat-form-field>
+        <input type="text" matInput id="titolo" name="titolo" placeholder="titolo del bundle" #titolo>
+    </mat-form-field>
+    <button mat-raised-button (click)="saveBundle(titolo.value)">Salva</button>
+    <ul>
+        <li *ngFor="let libro of libri$ | async">
+            <input class="sel" type="checkbox" name="selezionato" [value]="libro.id" (click)="toggleValue(libro.id)">
+            <span>{{ libro.titolo}}</span>
+        </li>
+    </ul>    
+</div>

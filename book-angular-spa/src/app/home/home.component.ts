@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
                       'next': (res) => {
                         this.libri.push(res as Libro)
                         this.messaggiService.messaggio("libro aggiunto",TIPI_MESSAGGIO.ok)
+                        this.formAggiungi.reset()
                       },
                       'error': error => console.log(error)
                     }  
