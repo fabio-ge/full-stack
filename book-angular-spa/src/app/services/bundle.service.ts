@@ -14,6 +14,18 @@ export class BundleService {
 
   creaNuovoBundle(bundle: Bundle){
     return this.http.post(this.baseUrl,bundle)
-  }            
+  }
+  
+  getAll() {
+    return this.http.get<Bundle[]>(this.baseUrl)
+  }
+
+  getBundleById(bundleId: number) {
+    return this.http.get<Bundle>(`${this.baseUrl}/${bundleId}`)
+  }
+
+  delete(bundleId: number) {
+    return this.http.delete(`${this.baseUrl}/${bundleId}`)
+  }
 
 }

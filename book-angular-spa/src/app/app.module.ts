@@ -17,6 +17,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ListaLibriComponent } from './lista-libri/lista-libri.component';
+import { LibroComponent } from './libro/libro.component';
+import { ElencoComponent } from './elenco/elenco.component';
  
 
 @NgModule({
@@ -27,7 +29,9 @@ import { ListaLibriComponent } from './lista-libri/lista-libri.component';
     LoginComponent,
     CreaComponent,
     GuardaComponent,
-    ListaLibriComponent
+    ListaLibriComponent,
+    LibroComponent,
+    ElencoComponent
   ],
   imports: [
     BrowserModule,

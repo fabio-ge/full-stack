@@ -14,7 +14,7 @@ export class MessaggiService {
         horizontalPosition: 'center',
         verticalPosition: 'top',
         duration: 3000,
-        panelClass: tipo === TIPI_MESSAGGIO.ok ? 'background-green' : 'background-red'
+        panelClass: tipo === TIPI_MESSAGGIO.ok ? 'success' : 'error'
       })
   }
 }

@@ -1,1 +1,18 @@
-<p>guarda works!</p>
+
+<div class="container">
+    <h2>Elenco dei bundle</h2>
+    <ul>
+        <li class="bundle" *ngFor="let bundle of elencoBundle$ | async">
+                <h3>{{ bundle.nome }}</h3>
+                <ul>
+                    <li class="bundle__libro" *ngFor="let id of bundle.elencoLibri">
+                        <app-libro [id]="id"></app-libro>
+                    </li>
+                </ul>
+                <div class="actions">
+                    <button mat-raised-button (click)="sgancia(bundle.id)">Sgancia i libri dal bundle</button>
+                    <button mat-raised-button (click)="venduto(bundle.id)">Bundle venduto</button>
+                </div>
+        </li>
+    </ul>
+</div>

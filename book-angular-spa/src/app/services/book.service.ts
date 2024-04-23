@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class BookService {
   baseurl = 'http://localhost:3000/books'
-
+  
   constructor(private http: HttpClient) { }
 
   postLibro(payloadLibro: Libro) {
@@ -21,6 +21,10 @@ export class BookService {
 
   findByTitolo(titolo: string): Observable<Libro[]> {
     return this.http.get<Libro[]>(`${this.baseurl}?titolo_like=${titolo}`)
+  }
+
+  getBookById(id: number): Observable<Libro> {
+    return this.http.get<Libro>(`${this.baseurl}/${id}`)
   }
 
   deleteBookById(id: number) {

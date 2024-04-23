@@ -8,6 +8,7 @@ html, body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    background-color: var(--clr-primary);
 }
 
 img {
@@ -38,5 +39,23 @@ body {
     font-family: var(--ff);
     font-style: var(--fstyle);
     font-weight: var(--fw);
+}
+
+.success simple-snack-bar .mat-mdc-snack-bar-label{
+    background-color: green;
+    font-size: 24px;
+    padding: 0.6em 1.2em;
+    color: white;
+    text-transform: uppercase;
+    font-family: var(--ff);
+}
+
+.error simple-snack-bar .mat-mdc-snack-bar-label{
+    background-color: red;
+    font-size: 24px;
+    padding: 0.6em 1.2em;
+    color: white;
+    text-transform: uppercase;
+    font-family: var(--ff);
 }
     
