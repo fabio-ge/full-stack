@@ -1,0 +1,9 @@
+#selezione {
+    margin: 2em;
+}
+
+p {
+    margin-left: 2em;
+    display: flex;
+    gap: 2em;
+}

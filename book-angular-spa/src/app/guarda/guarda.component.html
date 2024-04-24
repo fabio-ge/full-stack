@@ -3,7 +3,7 @@
     <h2>Elenco dei bundle</h2>
     <ul>
         <li class="bundle" *ngFor="let bundle of elencoBundle$ | async">
-                <h3>{{ bundle.nome }}</h3>
+                <a href="#" routerLink="/elenco/{{ bundle.id }}"><h3>{{ bundle.nome }}</h3></a>
                 <ul>
                     <li class="bundle__libro" *ngFor="let id of bundle.elencoLibri">
                         <app-libro [id]="id"></app-libro>

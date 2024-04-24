@@ -27,5 +27,5 @@ export class BundleService {
   delete(bundleId: number) {
     return this.http.delete(`${this.baseUrl}/${bundleId}`)
   }
-
+ 
 }

@@ -1,1 +1,22 @@
-<p>elenco works!</p>
+<div id="selezione">
+    <label for="autore">autore</label> <input type="checkbox" id="autore" [(ngModel)]="autoreChecked">
+    <label for="titolo">titolo</label> <input type="checkbox" id="titolo" checked  [(ngModel)]="titoloChecked">
+    <label for="editore">editore</label> <input type="checkbox" id="editore" checked  [(ngModel)]="editoreChecked">
+    <label for="condizioni">condizioni</label> <input type="checkbox" id="condizioni" [(ngModel)]="condizioniChecked">
+</div>
+<div *ngIf="!libriBundle.length">
+    <p *ngFor="let libro of libri$ | async">
+        <span *ngIf="autoreChecked">{{ libro.autore }}</span>
+        <span *ngIf="titoloChecked">{{ libro.titolo }}</span>
+        <span *ngIf="editoreChecked">{{ libro.edizione }}</span>
+        <span *ngIf="condizioniChecked">{{ libro.condizioni }}</span>
+    </p>
+</div>
+<div *ngIf="libriBundle.length">
+    <p *ngFor="let libro of libriBundle">
+        <span *ngIf="autoreChecked">{{ libro.autore }}</span>
+        <span *ngIf="titoloChecked">{{ libro.titolo }}</span>
+        <span *ngIf="editoreChecked">{{ libro.edizione }}</span>
+        <span *ngIf="condizioniChecked">{{ libro.condizioni }}</span>
+    </p>
+</div>
