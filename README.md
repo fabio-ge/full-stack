@@ -6,10 +6,8 @@ Ultimamente mi è venuto da pensare a come poter implementare una nuova applicaz
 giusto per essere sicuro di non dare per scontato che le cose che sto usando adesso
 siano per forza le migliori.
 In più mi piacerebbe esplorare possibilità diverse, ad esempio verificando cosa succede
-se decido di usare un baas (backend as a service).
-Per fare questo non mi piaceva molto l' idea della classica Todo List, perché è 
-un' applicazione troppo semplice e, secondo me, non è in grado di dare un buon riscontro sulla
-bontà delle tecnologie scelte. 
+se decido di sviluppare un' intera app concentrandomi solo sul backend o solo sul frontend.
+Per fare questo non mi piaceva molto l' idea della classica Todo List, perché ormai ne ho fatte troppe e, secondo me, può essere interessante, anche solo in fase di sperimentazione, risolvere problemi diversi. 
 Perciò ho deciso di provare con un' applicazione un po' più complessa della TODO, ma comunque gestibile
 per poter fare, abbastanza velocemente, 3 o 4 implementazioni diverse.
 Ho preso spunto da un caso reale: una casa piena di libri e la necessità di disfarsene.
@@ -32,7 +30,7 @@ Ci sono le seguenti funzionalità:
   - eliminare un libro
     - elimina un libro dal DB. Se il libro era presente anche in un bundle, lo toglie dal Bundle
   - creare un bundle
-    - un bundle è un sottoinsieme di libri, raggruppati da un etichetta comune. Ad esempio si può creare il Bundle della narrativa italiana e includere tutti i libri di autori italiani. E' utile perché, per vendere o regalare i libri, spesso è utile raggrupparli per genere o, viceversa, se si è già raggiunto un accordo con una libreria si può creare il bundle per quella libreria per poi eliminare i libri in blocco, una volta venduti.
+    - un bundle è un sottoinsieme di libri, raggruppati da un' etichetta comune. Ad esempio si può creare il Bundle della narrativa italiana e includere tutti i libri di autori italiani. E' utile perché, per vendere o regalare i libri, spesso è utile raggrupparli per genere o, viceversa, se si è già raggiunto un accordo con una libreria si può creare il bundle per quella libreria per poi eliminare i libri in blocco, una volta venduti.
     Uno stesso libro può essere presente in più bundle, perché ci sono diverse possibilità per raggrupparlo e venderlo.
   - eliminare un bundle
     - questa operazione considera il bundle venduto perciò fa le seguenti cose:
@@ -43,6 +41,7 @@ Ci sono le seguenti funzionalità:
     - elimina semplicemente l' associazione dei libri al bundle, che non esisterà più. I libri, ovviamente, restano disponibili nell' elenco.
   - stampare un elenco
     - permette di stampare a video, plain text, un elenco di libri, magari per fare un copia e incolla e mandarlo via mail
+    - la stampa può essere ristretta ad un bundle, ed è possibile scegliere quali campi mostrare
 
 ## Base dati
 
@@ -52,7 +51,7 @@ Ce ne sono 3 per la logica dell' applicazione.
 Una per i libri, una per i bundle e l' ultima per le associazioni tra libri e bundle.
 Per ulteriori dettagli vedere il file init.sql dentro ai singoli progetti.
 
-## Prima applicazione (ah i bei tempi andati)
+## Prima applicazione MPA (ah i bei tempi andati)
 
 Questa applicazione è un po' un' operazione di nostalgia, perché è fatta ricordando i tempi in cui le web app erano quasi tutte delle multi page application e le interazioni con il js erano limitate a qualche funzionalità di nicchia.
 In questo caso, giusto per andare sul sicuro, non c' è una riga di js. Se guardate ai file html che vengono giù, vedrete che non ho mai incluso uno script js, né l' ho usato inline nell' html.
@@ -119,3 +118,33 @@ Per questo comportamento ci vengono in aiuto 2 attributi resi disponibili da HTM
 
 Nota a margine: E' giusto dire che parliamo di uno sviluppo senza Js? No. Senza scrivere JS, c' è differenza. Htmx è una libreria javascript, quindi non si può dire che sviluppiano senza javascript. 
 In più sono previste funzionalità aggiuntive con un light scripting. cioè piccoli snippet js che aumentano l' interattività dell' interfaccia, senza diventare un nuovo client vero e proprio. HTMX è js friendly, purché il js resti confinato a quello per cui era stato pensato in origine.
+
+## Terza applicazione SPA
+
+### Premessa
+Qua siamo nel regno di quello che oggi, per lo sviluppo web, viene considerato standard. Rispetto ai progetti precedenti, che quasi erano focalizzati solo sul backend, questo ha un focus specifico sul frontend con angular.
+Per questo motivo il "server" viene simulato con la libreria json-server di npm e, per vedere il progetto in azione, è necessario far partire il server:
+```javascript
+  json-server --watch db.json
+```
+il file db.json è dentro il src generato da angular mediante cli e, in questo caso, sostituisce il file init.sql, perché è dentro questo json che ci sono i dati degli utenti, solo uno, e dei libri.
+Va da sè che non è una soluzione che possa funzionare in produzione, tanto più che la password è in chiaro. Serviva solo per fare un esperimento. Il focus è sull' implementazione del frontend.
+
+### Considerazioni
+
+il tempo di sviluppo è stato maggiore, tenuto anche conto che, in un caso reale, avrei dovuto sviluppare anche la parte di backend (ma questo forse si potrebbe superare usando un baas, tipo Firebase).
+La complessità, comunque, mi pare maggiore a livello di gestione anche se, a onor del vero, l' organizzazione del frontend, tramite angular, è più ingegnerizzata di quanto non fosse con i template thymeleaf. In più ho almeno questi vantaggi:
+  1. molta più flessibilità sul frontend, perché posso spingere le interazioni lato client
+  2. comodità di utilizzo di librerie con componenti già stilizzati (tipo angular material) 
+
+Certo il peso della pagina iniziale dell' applicazione è diventato molto maggiore di quello che avevo con l' applicazione HDA
+
+## Conclusioni
+
+Magari mi verrà voglia di provare a fare altre implementazioni ma, per adesso, traggo comunque alcune conclusioni.
+- Non credo che esista, in assoluto, una scelta migliore di altre. Forse la MPA è ormai vecchiotta, e non la sceglierei per uno sviluppo reale, anche se non escludo che in alcuni scenari possa comunque ancora funzionare.
+
+- Hda mi piace molto e mi sembra una tecnologia promettente. La userei volentieri per progetti di media dimensione, dove non sono previste interazioni particolari con gli utenti (per esempio non serve implementare un datepicker) e dove i dati che devono essere salvati possono essere divisi in piccole form da salvare separatamente.
+
+- Spa (angular e Spring) è quello che userei, e che uso, per progetti di grandi dimensioni, dove si collabora in tanti, e dove l' interfaccia deve poter fare di tutto e io non voglio reimplementare cose per cui già esistono librerie piuttosto robuste. Anche quando serve salvare blocchi di dati che non si fanno confinare facilmente in una form, meglio usare un framework come angular
+
